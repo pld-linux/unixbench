@@ -2,7 +2,7 @@ Summary:	Unix Bench
 Summary(pl):	Unix Bench
 Name:		unixbench
 Version:	4.1.0
-Release:	3
+Release:	4
 License:	unknown ("for usage of Linux community")
 Group:		Applications/System
 Source0:	ftp://ftp.tux.org/pub/tux/benchmarks/System/unixbench/%{name}-%{version}.tgz
