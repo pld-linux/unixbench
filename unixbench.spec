@@ -9,8 +9,19 @@ Source0:	ftp://ftp.tux.org/pub/tux/benchmarks/System/unixbench/%{name}-%{version
 # Source0-md5:	3561ae1f067f9dfb9707c062f536acac
 Patch0:		%{name}-dirs.patch
 URL:		http://www.tux.org/pub/tux/benchmarks/System/unixbench/
+Requires:	bc
+Requires:	ed
+Requires:	fileutils
+Requires:	gcc
+Requires:	glibc-devel
+Requires:	make
+Requires:	mawk
+Requires:	mktemp
+Requires:	sed
+Requires:	sh-utils
+Requires:	textutils
+Requires:	time
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Requires:	mawk fileutils textutils sh-utils bc ed sed mktemp make gcc glibc-devel time
 
 %description
 Unix Bench - based on the Byte Magazine Unix Benchmark.
