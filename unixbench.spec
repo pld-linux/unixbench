@@ -2,11 +2,12 @@ Summary:	Unix Bench
 Summary(pl):	Unix Bench
 Name:		unixbench
 Version:	4.1.0
-Release:	1
+Release:	2
 License:	unknown ("for usage of Linux community")
 Group:		Applications/System
 Source0:	ftp://ftp.tux.org/pub/tux/benchmarks/System/unixbench/%{name}-%{version}.tgz
 Patch0:		%{name}-dirs.patch
+Requires:	time
 URL:		http://www.tux.org/pub/tux/benchmarks/System/unixbench/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Requires:	mawk fileutils textutils sh-utils bc ed sed mktemp make gcc glibc-devel
