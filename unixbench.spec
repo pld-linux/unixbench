@@ -5,8 +5,6 @@ Version:	4.1.0
 Release:	1
 License:	unknown ("for usage of Linux community")
 Group:		Applications/System
-Group(de):	Applikationen/System
-Group(pl):	Aplikacje/System
 Source0:	ftp://ftp.tux.org/pub/tux/benchmarks/System/unixbench/%{name}-%{version}.tgz
 Patch0:		%{name}-dirs.patch
 URL:		http://www.tux.org/pub/tux/benchmarks/System/unixbench/
