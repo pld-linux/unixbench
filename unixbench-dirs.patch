@@ -1,0 +1,123 @@
+--- unixbench-4.1.0/Run.orig	Thu Jul 29 00:04:47 1999
++++ unixbench-4.1.0/Run	Wed Oct 24 11:51:45 2001
+@@ -87,55 +87,36 @@
+ 	UNAME="uname -a"
+ fi
+ 
+-# check that the required files are in the proper places
+-if make check; then
+-        :
+-else
+-	make all
+-fi
++WORKDIR=`mktemp -d ${TMPDIR:-/tmp}/unixbenchXXXXXX`
++cd $WORKDIR
++
++trap "rm -rf $WORKDIR; exit" EXIT INT
+ 
++UNIXBENCHDIR="/usr/lib/unixbench"
+ 
+-# establish full paths to directories
+-_WD=`pwd`
+-HOMEDIR=${HOMEDIR-.}
+-cd $HOMEDIR
+-HOMEDIR=`pwd`
+-cd $_WD
+-
+-BINDIR=${BINDIR-${HOMEDIR}/pgms}
+-cd $BINDIR
+-BINDIR=`pwd`
+-cd $_WD
++BINDIR=${UNIXBENCHDIR}
+ # let's extend the path to this directory
+ PATH="${PATH}:${BINDIR}"
+ 
+-SCRPDIR=${SCRPDIR-${HOMEDIR}/pgms}
+-cd $SCRPDIR
+-SCRPDIR=`pwd`
+-cd $_WD
+-
+-TMPDIR=${HOMEDIR}/tmp
+-cd $TMPDIR
+-TMPDIR=`pwd`
+-cd $_WD
+-
+-RESULTDIR=${RESULTDIR-${HOMEDIR}/results}
+-cd $RESULTDIR
+-RESULTDIR=`pwd`
+-cd $_WD
++SCRPDIR=${UNIXBENCHDIR}
++
++mkdir ${WORKDIR}/tmp
++MYTMPDIR=${WORKDIR}/tmp
++
++mkdir ${WORKDIR}/results
++RESULTDIR=${WORKDIR}/results
+ 
+ TIMEACCUM=${TIMEACCUM-${RESULTDIR}/times}
+ 
+-TESTDIR=${TESTDIR-${HOMEDIR}/testdir}
+-cd $TESTDIR
+-TESTDIR=`pwd`
+-cd $_WD
++mkdir ${WORKDIR}/testdir
++TESTDIR=${WORKDIR}/testdir
++
++export WORKDIR BINDIR MYTMPDIR RESULTDIR PATH TESTDIR TIMEACCUM
+ 
+-export BINDIR TMPDIR RESULTDIR PATH TESTDIR TIMEACCUM
+ #
+ cat ${BINDIR}/unixbench.logo # display banner
+ rm -f ${TIMEACCUM}      # clean out old time accumulation file
+-echo "kill -9 $$" > ${TMPDIR}/kill_run ; chmod u+x ${TMPDIR}/kill_run
++echo "kill -9 $$" > ${MYTMPDIR}/kill_run ; chmod u+x ${MYTMPDIR}/kill_run
+ #
+ arithmetic="arithoh short int long float double whetstone-double"
+ oldsystem="execl fstime fsbuffer fsdisk pipe context1 spawn syscall"
+@@ -216,7 +197,7 @@
+ fi
+ 
+ date=`date`
+-TMPTIMES=${TMPDIR}/$$.tmp
++TMPTIMES=${MYTMPDIR}/$$.tmp
+ LOGFILE=${RESULTDIR}/log
+ REPORTLOG=${RESULTDIR}/report
+ #add old log to accumulated log or move it
+@@ -366,7 +347,7 @@
+ 
+ 	C)  
+ 		logmsg="C Compiler Throughput"
+-		prog="looper ${looper-60} ${CC} cctest.c"
++		prog="looper ${looper-60} ${CC} ${SCRPDIR}/cctest.c"
+ 		stdout=/dev/null
+ 		repeat="$shortloop"
+ 		cleanopt="-m $TMPTIMES"
+@@ -386,7 +367,7 @@
+ 	dc)  
+ 		logmsg="Dc: sqrt(2) to 99 decimal places"
+ 		prog="looper ${looper-30} dc"
+-		stdin=dc.dat
++		stdin=${SCRPDIR}/dc.dat
+ 		stdout=/dev/null
+ 		cleanopt="-m $TMPTIMES"
+ 		;;
+@@ -449,7 +430,7 @@
+           if [ "$runoption" != 'D' ]  # level 1
+ 	  then
+ 	    # regular Run - set logfile to go on signal
+-            trap "${BINDIR}/cleanup.sh -L $LOGFILE -i $i $cleanopt -a; exit" 1 2 3 15
++            trap "${BINDIR}/cleanup.sh -L $LOGFILE -i $i $cleanopt -a; rm -rf $WORKDIR; exit" 1 2 3 15
+ 	  else
+             trap "exit" 1 2 3 15
+ 	  fi #end level 1
+--- unixbench-4.1.0/pgms/tst.sh.orig	Mon Nov 27 18:07:03 1995
++++ unixbench-4.1.0/pgms/tst.sh	Wed Oct 24 11:53:23 2001
+@@ -14,7 +14,7 @@
+ #
+ ###############################################################################
+ ID="@(#)tst.sh:3.4 -- 5/15/91 19:30:24";
+-sort >sort.$$ <sort.src
++sort >sort.$$ <${SCRPDIR}/sort.src
+ od sort.$$ | sort -n +1 > od.$$
+ grep the sort.$$ | tee grep.$$ | wc > wc.$$
+ rm sort.$$ grep.$$ od.$$ wc.$$
