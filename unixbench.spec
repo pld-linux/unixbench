@@ -2,7 +2,7 @@ Summary:	Unix Bench
 Summary(pl):	Unix Bench
 Name:		unixbench
 Version:	4.1.0
-Release:	4
+Release:	5
 License:	unknown ("for usage of Linux community")
 Group:		Applications/System
 Source0:	ftp://ftp.tux.org/pub/tux/benchmarks/System/unixbench/%{name}-%{version}.tgz
@@ -34,7 +34,9 @@ Unix Bench, bazowany na Unix Benchmark z Byte Magazine.
 %patch -p1
 
 %build
+rm -f pgms/select
 %{__make}
+%{__make} pgms/{poll,select}
 
 %install
 rm -rf $RPM_BUILD_ROOT
