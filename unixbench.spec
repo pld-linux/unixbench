@@ -6,6 +6,7 @@ Release:	3
 License:	unknown ("for usage of Linux community")
 Group:		Applications/System
 Source0:	ftp://ftp.tux.org/pub/tux/benchmarks/System/unixbench/%{name}-%{version}.tgz
+# Source0-md5:	3561ae1f067f9dfb9707c062f536acac
 Patch0:		%{name}-dirs.patch
 URL:		http://www.tux.org/pub/tux/benchmarks/System/unixbench/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
