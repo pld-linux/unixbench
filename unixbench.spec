@@ -2,15 +2,14 @@ Summary:	Unix Bench
 Summary(pl):	Unix Bench
 Name:		unixbench
 Version:	4.1.0
-Release:	2
+Release:	3
 License:	unknown ("for usage of Linux community")
 Group:		Applications/System
 Source0:	ftp://ftp.tux.org/pub/tux/benchmarks/System/unixbench/%{name}-%{version}.tgz
 Patch0:		%{name}-dirs.patch
-Requires:	time
 URL:		http://www.tux.org/pub/tux/benchmarks/System/unixbench/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Requires:	mawk fileutils textutils sh-utils bc ed sed mktemp make gcc glibc-devel
+Requires:	mawk fileutils textutils sh-utils bc ed sed mktemp make gcc glibc-devel time
 
 %description
 Unix Bench - based on the Byte Magazine Unix Benchmark.
@@ -33,14 +32,12 @@ install pgms/* $RPM_BUILD_ROOT%{_libdir}/unixbench
 install testdir/* $RPM_BUILD_ROOT%{_libdir}/unixbench
 install Run $RPM_BUILD_ROOT%{_bindir}/unixbench
 
-gzip -9nf README
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README
 %attr(755,root,root) %{_bindir}/unixbench
 %dir %{_libdir}/unixbench
 %attr(755,root,root) %{_libdir}/unixbench/[ae-hl-rtw]*
