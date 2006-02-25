@@ -2,12 +2,13 @@ Summary:	Unix Bench
 Summary(pl):	Unix Bench
 Name:		unixbench
 Version:	4.1.0
-Release:	5
+Release:	6
 License:	unknown ("for usage of Linux community")
 Group:		Applications/System
 Source0:	ftp://ftp.tux.org/pub/tux/benchmarks/System/unixbench/%{name}-%{version}.tgz
 # Source0-md5:	3561ae1f067f9dfb9707c062f536acac
 Patch0:		%{name}-dirs.patch
+Patch1:		%{name}-lib64.patch
 URL:		http://www.tux.org/pub/tux/benchmarks/System/unixbench/
 Requires:	bc
 Requires:	ed
@@ -31,7 +32,10 @@ Unix Bench, bazowany na Unix Benchmark z Byte Magazine.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%if "%{_lib}" == "lib64"
+%patch1 -p1
+%endif
 
 %build
 rm -f pgms/select
