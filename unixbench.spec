@@ -1,5 +1,5 @@
 Summary:	Unix Bench
-Summary(pl.UTF-8):   Unix Bench
+Summary(pl.UTF-8):	Unix Bench
 Name:		unixbench
 Version:	4.1.0
 Release:	6
