@@ -1,5 +1,5 @@
 Summary:	Unix Bench
-Summary(pl):	Unix Bench
+Summary(pl.UTF-8):   Unix Bench
 Name:		unixbench
 Version:	4.1.0
 Release:	6
@@ -27,7 +27,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Unix Bench - based on the Byte Magazine Unix Benchmark.
 
-%description -l pl
+%description -l pl.UTF-8
 Unix Bench, bazowany na Unix Benchmark z Byte Magazine.
 
 %prep
