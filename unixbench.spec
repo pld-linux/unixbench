@@ -12,6 +12,7 @@ Patch1:		%{name}-lib64.patch
 URL:		http://www.tux.org/pub/tux/benchmarks/System/unixbench/
 Requires:	bc
 Requires:	ed
+Requires:	file
 Requires:	fileutils
 Requires:	gcc
 Requires:	glibc-devel
