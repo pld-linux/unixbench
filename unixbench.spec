@@ -1,15 +1,16 @@
+%define		relname		UnixBench
 Summary:	Unix Bench
 Summary(pl.UTF-8):	Unix Bench
 Name:		unixbench
-Version:	4.1.0
-Release:	7
+Version:	5.1.3
+Release:	0.1
 License:	unknown ("for usage of Linux community")
 Group:		Applications/System
-Source0:	ftp://ftp.tux.org/pub/tux/benchmarks/System/unixbench/%{name}-%{version}.tgz
-# Source0-md5:	3561ae1f067f9dfb9707c062f536acac
+Source0:	http://byte-unixbench.googlecode.com/files/%{relname}%{version}.tgz
+# Source0-md5:	21edc4a9e41ad1f9b0297d7b6d45c99a
 Patch0:		%{name}-dirs.patch
 Patch1:		%{name}-lib64.patch
-URL:		http://www.tux.org/pub/tux/benchmarks/System/unixbench/
+URL:		http://code.google.com/p/byte-unixbench/
 Requires:	bc
 Requires:	ed
 Requires:	file
