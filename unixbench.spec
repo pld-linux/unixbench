@@ -3,13 +3,13 @@ Summary:	Unix Bench
 Summary(pl.UTF-8):	Unix Bench
 Name:		unixbench
 Version:	5.1.3
-Release:	0.1
+Release:	0.9
 License:	unknown ("for usage of Linux community")
 Group:		Applications/System
 Source0:	http://byte-unixbench.googlecode.com/files/%{relname}%{version}.tgz
 # Source0-md5:	21edc4a9e41ad1f9b0297d7b6d45c99a
+Source1:	unixbench.sh
 Patch0:		%{name}-dirs.patch
-Patch1:		%{name}-lib64.patch
 URL:		http://code.google.com/p/byte-unixbench/
 Requires:	bc
 Requires:	ed
@@ -33,11 +33,10 @@ Unix Bench - based on the Byte Magazine Unix Benchmark.
 Unix Bench, bazowany na Unix Benchmark z Byte Magazine.
 
 %prep
-%setup -q
+%setup -q -n %{relname}
+install %{SOURCE1} unixbench.sh
 %patch0 -p1
-%if "%{_lib}" == "lib64"
-%patch1 -p1
-%endif
+%{__sed} -i "/export.UB_BINDIR/s@=.*@=%{_libdir}/unixbench@" unixbench.sh
 
 %build
 rm -f pgms/select
@@ -50,7 +49,8 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/unixbench}
 
 install pgms/* $RPM_BUILD_ROOT%{_libdir}/unixbench
 install testdir/* $RPM_BUILD_ROOT%{_libdir}/unixbench
-install Run $RPM_BUILD_ROOT%{_bindir}/unixbench
+install Run $RPM_BUILD_ROOT%{_libdir}/unixbench
+install unixbench.sh $RPM_BUILD_ROOT%{_bindir}/unixbench
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -63,7 +63,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/unixbench/[ae-hl-rtw]*
 %attr(755,root,root) %{_libdir}/unixbench/c[lo]*
 %attr(755,root,root) %{_libdir}/unixbench/d[ho]*
-%attr(755,root,root) %{_libdir}/unixbench/index.sh
+%attr(755,root,root) %{_libdir}/unixbench/int
+%attr(755,root,root) %{_libdir}/unixbench/Run
 %attr(755,root,root) %{_libdir}/unixbench/s[ehpy]*
 %{_libdir}/unixbench/cctest.c
 %{_libdir}/unixbench/dc.dat
