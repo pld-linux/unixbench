@@ -1,3 +1,6 @@
+# TODO:
+#	- review Requires/Suggests for default/optional tests
+#
 %define		relname		UnixBench
 Summary:	Unix Bench
 Summary(pl.UTF-8):	Unix Bench
