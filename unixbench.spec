@@ -4,11 +4,11 @@ Summary(pl.UTF-8):	Unix Bench
 Name:		unixbench
 Version:	5.1.3
 Release:	0.9
-License:	unknown ("for usage of Linux community")
+License:	GPL v2
 Group:		Applications/System
 Source0:	http://byte-unixbench.googlecode.com/files/%{relname}%{version}.tgz
 # Source0-md5:	21edc4a9e41ad1f9b0297d7b6d45c99a
-Source1:	unixbench.sh
+Source1:	%{name}.sh
 Patch0:		%{name}-dirs.patch
 URL:		http://code.google.com/p/byte-unixbench/
 Requires:	bc
