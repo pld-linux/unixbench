@@ -16,7 +16,6 @@ Requires:	ed
 Requires:	file
 Requires:	fileutils
 Requires:	gcc
-Requires:	glibc-devel
 Requires:	make
 Requires:	mawk
 Requires:	mktemp
