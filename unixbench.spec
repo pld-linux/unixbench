@@ -56,7 +56,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README
+%doc README USAGE
 %attr(755,root,root) %{_bindir}/unixbench
 %dir %{_libdir}/unixbench
 %attr(755,root,root) %{_libdir}/unixbench/[ae-hl-rtw]*
