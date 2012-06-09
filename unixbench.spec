@@ -19,9 +19,9 @@ Source0:	http://byte-unixbench.googlecode.com/files/%{relname}%{version}.tgz
 Source1:	%{name}.sh
 Patch0:		%{name}-dirs.patch
 URL:		http://code.google.com/p/byte-unixbench/
+%{?with_x11:BuildRequires:	OpenGL-devel}
 %{?with_x11:BuildRequires:	xorg-lib-libX11-devel}
 %{?with_x11:BuildRequires:	xorg-lib-libXext-devel}
-%{?with_x11:BuildRequires:	OpenGL-devel}
 Requires:	mktemp
 Requires:	perl(Time::HiRes)
 # grep test
