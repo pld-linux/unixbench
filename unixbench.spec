@@ -1,5 +1,8 @@
 # TODO:
 #	- do something sane with temporary dir (rm but save test results/logs)
+#	- resolve problems (Can't take log of 0 at /usr/lib/unixbench/Run line 926) with
+#	  short/long/int/float/double/arithoh tests)
+#	- do something with missing programs: 3dinfo + runlevel
 #
 %bcond_without	x11		# build graphics test
 #
