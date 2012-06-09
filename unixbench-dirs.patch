@@ -11,6 +11,33 @@
  rm sort.$$ grep.$$ od.$$ wc.$$
 --- UnixBench/Run.orig	2012-06-05 14:41:53.016735725 +0200
 +++ UnixBench/Run	2012-06-05 14:42:19.356633000 +0200
+@@ -434,7 +434,7 @@
+         "logmsg" => "C Compiler Throughput ($cCompiler)",
+         "cat"    => 'misc',
+         "prog" => "${BINDIR}/looper",
+-        "options" => "60 $cCompiler cctest.c",
++        "options" => "60 $cCompiler ${BINDIR}/cctest.c",
+     },
+     "arithoh" => {
+         "logmsg" => "Arithoh",
+@@ -471,7 +471,7 @@
+         "cat"    => 'misc',
+         "prog" => "${BINDIR}/looper",
+         "options" => "30 dc",
+-        "stdin" => "dc.dat",
++        "stdin" => "${BINDIR}/dc.dat",
+     },
+     "hanoi" => {
+         "logmsg" => "Recursion Test -- Tower of Hanoi",
+@@ -482,7 +482,7 @@
+         "logmsg" => "Grep a large file (system's grep)",
+         "cat"    => 'misc',
+         "prog" => "${BINDIR}/looper",
+-        "options" => "30 grep -c gimp large.txt",
++        "options" => "30 grep -c gimp ${BINDIR}/large.txt",
+     },
+     "sysexec" => {
+         "logmsg" => "Exec System Call Overhead",
 @@ -784,15 +784,6 @@
      # Set the language.
      $ENV{'LANG'} = $language;

@@ -1,12 +1,14 @@
 # TODO:
-#	- review Requires/Suggests for default/optional tests
+#	- do something sane with temporary dir (rm but save test results/logs)
+#
+%bcond_without	x11		# build graphics test
 #
 %define		relname		UnixBench
 Summary:	Unix Bench
 Summary(pl.UTF-8):	Unix Bench
 Name:		unixbench
 Version:	5.1.3
-Release:	0.9
+Release:	0.10
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://byte-unixbench.googlecode.com/files/%{relname}%{version}.tgz
@@ -14,18 +16,20 @@ Source0:	http://byte-unixbench.googlecode.com/files/%{relname}%{version}.tgz
 Source1:	%{name}.sh
 Patch0:		%{name}-dirs.patch
 URL:		http://code.google.com/p/byte-unixbench/
-Requires:	bc
-Requires:	ed
-Requires:	file
-Requires:	fileutils
-Requires:	gcc
-Requires:	make
-Requires:	mawk
+%{?with_x11:BuildRequires:	xorg-lib-libX11-devel}
+%{?with_x11:BuildRequires:	xorg-lib-libXext-devel}
+%{?with_x11:BuildRequires:	OpenGL-devel}
 Requires:	mktemp
-Requires:	sed
-Requires:	sh-utils
-Requires:	textutils
-Requires:	time
+Requires:	perl(Time::HiRes)
+# grep test
+Suggests:	grep
+# C test
+Suggests:	gcc
+Suggests:	glibc-devel
+# dc test
+Suggests:	bc
+# graphics test
+Suggests:	xorg-app-x11perf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -42,7 +46,8 @@ install %{SOURCE1} unixbench.sh
 
 %build
 rm -f pgms/select
-%{__make} -j 1
+
+%{__make} -j 1 %{?with_x11:GRAPHIC_TESTS=1}
 %{__make} pgms/{poll,select}
 
 %install
@@ -68,6 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/unixbench/int
 %attr(755,root,root) %{_libdir}/unixbench/Run
 %attr(755,root,root) %{_libdir}/unixbench/s[ehpy]*
+%{?with_x11:%attr(755,root,root) %{_libdir}/unixbench/ubgears}
 %{_libdir}/unixbench/cctest.c
 %{_libdir}/unixbench/dc.dat
 %{_libdir}/unixbench/index.[ab]*
