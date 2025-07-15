@@ -44,7 +44,7 @@ Unix Bench, bazowany na Unix Benchmark z Byte Magazine.
 %prep
 %setup -q -n %{relname}
 install %{SOURCE1} unixbench.sh
-%patch0 -p1
+%patch -P0 -p1
 %{__sed} -i "/export.UB_BINDIR/s@=.*@=%{_libdir}/unixbench@" unixbench.sh
 
 %build
